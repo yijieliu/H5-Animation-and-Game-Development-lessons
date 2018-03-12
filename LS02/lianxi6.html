@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>1.Canvas绘图基本形状 2.Canvas描边与填充（纯色、渐变色）</title>
+    <script>
+        /*window.addEventListener('load', eventWindowLoaded, false);
+        function eventWindowLoaded() {
+            canvasApp();
+        }
+
+        function canvasApp() {
+            var theCanvas = document.getElementById('canvas');
+            var context = theCanvas.getContext('2d');
+            drawRect(context);
+            drawEllipse(context);
+            drawTriangle(context);
+
+        }
+        function drawRect(ctx) {
+            ctx.fillStyle = '#000000';//设置填充颜色
+            ctx.strokeStyle = '#00ffff';//设置描边颜色
+            ctx.lineWidth = 5;//设置线宽
+            ctx.beginPath();
+            ctx.rect( 200, 0, 80, 120);
+            ctx.stroke();
+
+            ctx.strokeStyle = '#00ff00';//设置描边颜色
+            ctx.fillRect(320, 20, 80, 80);
+            ctx.strokeRect(0 + 300, 0, 120, 120);
+            ctx.clearRect(40 + 300, 40, 40, 32);
+        }
+
+        function drawEllipse(ctx) {
+            ctx.save();
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 10;
+            ctx.beginPath();
+            ctx.ellipse(100, 100, 50, 75, 0, Math.PI/2, 2 * Math.PI,false); //
+            ctx.stroke();
+            ctx.restore();
+
+        }
+        function drawTriangle(ctx) {
+            ctx.triangle(10,210,100,20,10,300);
+            
+        }
+        CanvasRenderingContext2D.prototype.triangle = function (x1,y1,x2,y2,x3,y3) {
+            this.moveTo(x1,y1);
+            this.lineTo(x2,y3);
+            this.lineTo(x3,y3);
+            this.closePath();
+            this.stroke();
+        }*/
+         window.addEventListener('load', eventWindowLoaded, false);
+        function eventWindowLoaded() {
+            canvasApp();
+        }
+
+        function canvasApp() {
+            var theCanvas = document.getElementById('canvas');
+            var context = theCanvas.getContext('2d');
+            linearGradient();
+            radialGradient();
+            function linearGradient() {
+                var gr = context.createLinearGradient(200, 250, 300, 250);
+                context.lineWidth = 5;
+                gr.addColorStop(0, 'rgb(255,0,0)');
+                gr.addColorStop(0.5, 'rgb(0,255,0)');
+                gr.addColorStop(1, 'rgb(255,0,0)');
+
+                // Use the gradient for the fillStyle.
+                context.strokeStyle = gr;
+                context.strokeRect(200, 200, 100, 100);
+
+                var gr = context.createLinearGradient(200, 200, 300, 300);
+                gr.addColorStop(0, 'rgb(255,0,0)');
+                gr.addColorStop(1, 'rgb(0,255,0)');
+                context.fillStyle = gr;
+                context.fillRect(200 + 20, 200 + 20, 100 - 40, 100 - 40);
+                // context.strokeRect(200, 300, 50, 100);
+                // context.strokeRect(200, 400, 200, 100);
+            }
+            function radialGradient() {
+                var gr = context.createRadialGradient(50, 50, 25, 100, 100, 100);
+                gr.addColorStop(0, 'rgb(255,0,0)');
+                gr.addColorStop(0.5, 'rgb(0,255,0)');
+                gr.addColorStop(1, 'rgb(255,0,0)');
+                context.fillStyle = gr;
+                // context.fillRect(0, 0, 200, 200);
+
+                context.arc(100, 100, 100, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
+                context.fill();
+
+                context.strokeStyle = gr;
+                context.arc(100, 100, 50, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
+                context.stroke();
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <canvas id="canvas" width="500" height="500">
+            Your browser does not support the HTML 5 Canvas.
+        </canvas>
+    </div>
+</body>
+
+</html>
